@@ -17,7 +17,7 @@ const Testimonial = () => {
         },
         {   name: "Ava Johnson",
             location: "Barcelona, Spain", 
-            image: assets.testimonial_image_3,  
+            image: assets.testimonial_image_2,  
             testimonial: "I've rented cars from various companies, but the experience with Car Retal was exceptional." 
         },
     ];
