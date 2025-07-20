@@ -2,7 +2,7 @@ import React from 'react'
 import { assets } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
-const CarCards = ({car}) => {
+const CarCard = ({car}) => {
 
   const currency = import.meta.env.VITE_CURRENCY
   const navigate = useNavigate()
@@ -28,7 +28,7 @@ const CarCards = ({car}) => {
           <div className='flex justify-between items-start mb-2'>
             <div>
               <h3 className='text-lg font-medium'>{car.brand} {car.model}</h3>
-              <p className='text-muted-foreground text-sm'>{car.category} . {car.year}</p>
+              <p className='text-muted-foreground text-sm'>{car.category} • {car.year}</p>
             </div>
           </div>
 
@@ -59,4 +59,4 @@ const CarCards = ({car}) => {
   )
 }
 
-export default CarCards
+export default CarCard

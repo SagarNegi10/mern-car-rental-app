@@ -31,7 +31,7 @@ const CarDetails = () => {
           <div className='space-y-6'>
             <div>
               <h1 className='text-3xl font-bold'>{car.brand} {car.model}</h1>
-              <p className='text-gray-500 text-lg'>{car.category} . {car.year}</p>
+              <p className='text-gray-500 text-lg'>{car.category} • {car.year}</p>
             </div>
             
             <hr className='border-borderColor my-6'/>
