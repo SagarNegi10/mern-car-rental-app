@@ -1,6 +1,7 @@
 import User from "../models/user.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import Car from '../models/Car.js'
 
 // Generate JWT Token
 const generateToken = (userId) => {
@@ -27,7 +28,7 @@ export const registerUser = async (req, res) => {
         const user = await User.create({name, email, password: hashedPassword})
 
         const token = generateToken(user._id.toString())
-        res.json({success: true, token})
+        res.json({success: true, token, message: 'Registered & Logged In'})
 
     } catch (error) {
         console.log(error.message);
@@ -48,7 +49,7 @@ export const loginUser = async (req,res) => {
             return res.json({success: false, message: 'Invalid credentials'})
         }
         const token = generateToken(user._id.toString())
-        res.json({success: true, token})
+        res.json({success: true, token, message: 'Logged In'})
     } catch (error) {
         console.log(error.message);
         return res.json({success: false, message: error.message})
@@ -61,6 +62,17 @@ export const getUserData = async (req, res) => {
     try {
         const {user} = req;
         res.json({success: true, user})
+    } catch (error) {
+        console.log(error.message);
+        return res.json({success: false, message: error.message})
+    }
+}
+
+// Get All cars for the frontend
+export const getCars = async (req, res) => {
+    try {
+        const cars = await Car.find({isAvailable: true})
+        return res.json({success: true, cars})
     } catch (error) {
         console.log(error.message);
         return res.json({success: false, message: error.message})

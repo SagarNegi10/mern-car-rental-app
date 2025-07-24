@@ -9,10 +9,10 @@ export const changeRoleToOwner = async (req, res) => {
     try {
         const {_id} = req.user;
         await User.findByIdAndUpdate(_id, {role: "owner"})
-        res.json({success: true, meassge: "Now you can list cars"})
+        res.json({success: true, message: "Now you can list cars"})
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
 
@@ -43,11 +43,11 @@ export const addCar = async (req, res) => {
 
         const image = optimizedImageURL;
         await Car.create({...car, owner: _id, image})
-        res.json({success: true, meassge: 'Car Added'})
+        res.json({success: true, message: 'Car Added'})
 
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
 
@@ -58,8 +58,8 @@ export const getOwnerCars = async (req, res) => {
         const cars = await Car.find({owner: _id})
         res.json({success: true, cars})
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
 
@@ -72,16 +72,16 @@ export const toggleCarAvailability = async (req, res) => {
 
         // Checking is car belong to the user
         if(car.owner.toString() !== _id.toString()){
-            res.json({success: false, meassge: "Unauthorized"})
+            res.json({success: false, message: "Unauthorized"})
         }
 
         car.isAvailable = !car.isAvailable;
         await car.save()
 
-        res.json({success: true, meassge: "Availability Toggled"})
+        res.json({success: true, message: "Availability Toggled"})
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
 
@@ -94,17 +94,17 @@ export const deleteCar = async (req, res) => {
 
         // Checking is car belong to the user
         if(car.owner.toString() !== _id.toString()){
-            res.json({success: false, meassge: "Unauthorized"})
+            res.json({success: false, message: "Unauthorized"})
         }
 
         car.owner = null;
         car.isAvailable = false;
         await car.save()
 
-        res.json({success: true, meassge: "Car Removed"})
+        res.json({success: true, message: "Car Removed"})
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
 
@@ -113,7 +113,7 @@ export const getDashboardData = async (req, res) => {
     try {
         const {_id, role} = req.user;
         if(role !== 'owner'){
-            res.json({success: false, meassge: "Unauthorized"})
+            res.json({success: false, message: "Unauthorized"})
         }    
         const cars = await Car.find({owner: _id})
         const bookings = await Booking.find({owner: _id}).populate('car').sort({createdAt: -1});
@@ -135,15 +135,15 @@ export const getDashboardData = async (req, res) => {
         res.json({success: true, dashboardData})
 
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
 
 // API to update user Image
 export const updateUserImage = async (req, res) => {
     try {
-        const {_id} = req.user;
+        const { _id } = req.user;
         const imageFile = req.file;
 
         // Upload Image to ImageKit
@@ -167,10 +167,10 @@ export const updateUserImage = async (req, res) => {
         const image = optimizedImageURL;
         await User.findByIdAndUpdate(_id, {image});
 
-        res.json({success: true, meassge: 'Image Updated'})
+        res.json({success: true, message: 'Image Updated'})
 
     } catch (error) {
-        console.log(error.meassge);
-        res.json({success: false, meassge: error.meassge})
+        console.log(error.message);
+        res.json({success: false, message: error.message})
     }
 }
