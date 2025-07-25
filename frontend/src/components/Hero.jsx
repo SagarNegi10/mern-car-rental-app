@@ -10,8 +10,10 @@ const Hero = () => {
     const [pickupLocation, setPickupLocation] = useState()
 
     const handleSearch = (e) => {
-        e.preventDefault()
-        navigate('/cars?picupLocation=' + pickupLocation + '&pickupDate' + pickupDate + '&returnDate' + returnDate)
+      e.preventDefault();
+      navigate(
+      `/cars?pickupLocation=${pickupLocation}&pickupDate=${pickupDate}&returnDate=${returnDate}`
+      );
     }
 
   return (

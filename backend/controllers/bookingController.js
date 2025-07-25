@@ -14,7 +14,7 @@ const checkAvailability = async (car, pickupDate, returnDate) => {
 // API to check Availablilty of Car for a given Date and location
 export const checkAvailabilityOfCar = async (req, res) => {
     try {
-        const {loaction, pickupDate, returnDate} = req.body
+        const {location, pickupDate, returnDate} = req.body
         // fetch all available cars for the given loaction
         const cars = await Car.find({location, isAvailable: true})
 
