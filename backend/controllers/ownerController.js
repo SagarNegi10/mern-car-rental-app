@@ -113,7 +113,7 @@ export const getDashboardData = async (req, res) => {
     try {
         const {_id, role} = req.user;
         if(role !== 'owner'){
-            res.json({success: false, message: "Unauthorized"})
+            return res.json({success: false, message: "Unauthorized"})
         }    
         const cars = await Car.find({owner: _id})
         const bookings = await Booking.find({owner: _id}).populate('car').sort({createdAt: -1});
@@ -121,7 +121,7 @@ export const getDashboardData = async (req, res) => {
         const completedBookings = await Booking.find({owner: _id, status: "confirmed"})
 
         // Calaculate monthlyRevenue from bookings where status is confirmed
-        const monthlyRevenue = bookings.slice().filter(booking => booking.status === ' confirmed').reduce((acc, booking) => acc + booking.price, 0)
+        const monthlyRevenue = bookings.slice().filter(booking => booking.status === 'confirmed').reduce((acc, booking) => acc + booking.price, 0)
 
         const dashboardData = {
             totalCars: cars.length,
